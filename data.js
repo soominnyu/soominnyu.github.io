@@ -1,23 +1,44 @@
 export const menuArray = [
     {
-        name: "Pizza",
+        name: "냉면",
         ingredients: ["pepperoni", "mushrom", "mozarella"],
         id: 0,
-        price: 14,
-        emoji: "🍕"
+        price: 9000,
+        emoji: "🧊"
     },
     {
-        name: "Hamburger",
+        name: "밀면",
         ingredients: ["beef", "cheese", "lettuce"],
-        price: 12,
-        emoji: "🍔",
+        price: 8000,
+        emoji: "🍜",
         id: 1
     },
         {
-        name: "Beer",
+        name: "만두",
         ingredients: ["grain, hops, yeast, water"],
-        price: 12,
-        emoji: "🍺",
+        price: 6000,
+        emoji: "🥟",
         id: 2
+    },
+        {
+        name: "밀면사리",
+        ingredients: ["grain, hops, yeast, water"],
+        price: 2000,
+        emoji: "➕︎",
+        id: 3
+    },
+        {
+        name: "냉면사리",
+        ingredients: ["grain, hops, yeast, water"],
+        price: 3000,
+        emoji: "➕︎",
+        id: 4
+    },
+        {
+        name: "곱빼기",
+        ingredients: ["grain, hops, yeast, water"],
+        price: 1000,
+        emoji: "✖",
+        id: 5
     }
 ]
