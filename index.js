@@ -23,7 +23,7 @@ function submitPayment() {
     if (name && cardNumber && cVVNumber) {
         document.getElementById('order-summary-section').innerHTML = `
                 <div class="order-confirmation-msg">
-                    <p>Thanks, ${name}! Your order is on its way!</p>
+                    <p>Thanks, ₩{name}! Your order is on its way!</p>
                 </div>
     `
         document.getElementById('payment-details-modal').classList.add('hidden')
@@ -40,10 +40,10 @@ function removeItem(item) {
         <li>
             <div class="order-summary__item">
                 <div class="order-summary__item">
-                    <p class="menu__item-name" id="order-item-${orderItem.name}">${orderItem.name}</p>
-                    <button class="btn-remove-item" id="" data-remove-item="${orderItem.name}">remove</button>
+                    <p class="menu__item-name" id="order-item-₩{orderItem.name}">₩{orderItem.name}</p>
+                    <button class="btn-remove-item" id="" data-remove-item="₩{orderItem.name}">remove</button>
                 </div>
-                <p class="menu__item-price">$${orderItem.price}</p>
+                <p class="menu__item-price">₩₩{orderItem.price}</p>
             </div>
         </li>
 `
@@ -57,7 +57,7 @@ function calculateOrderTotal() {
     orderArray.forEach( function (orderItem) {
         orderTotal += orderItem.price
     })
-    document.getElementById('total-price').innerHTML = `$${orderTotal}`
+    document.getElementById('total-price').innerHTML = `₩₩{orderTotal}`
 }
 
 function completeOrder() {
@@ -73,10 +73,10 @@ function getOrderHtml(orderItem) {
         <li>
             <div class="order-summary__item">
                 <div class="order-summary__item">
-                    <p class="menu__item-name" id="order-item-${orderItem.name}">${orderItem.name}</p>
-                    <button class="btn-remove-item" id="" data-remove-item="${orderItem.name}">remove</button>
+                    <p class="menu__item-name" id="order-item-₩{orderItem.name}">₩{orderItem.name}</p>
+                    <button class="btn-remove-item" id="" data-remove-item="₩{orderItem.name}">remove</button>
                 </div>
-                <p class="menu__item-price">$${orderItem.price}</p>
+                <p class="menu__item-price">₩₩{orderItem.price}</p>
             </div>
         </li>
 `
@@ -85,26 +85,28 @@ function getOrderHtml(orderItem) {
 }
 
 function getMenuHtml() {
-    let menuHtml = ''
-    menuArray.forEach(function(menuItem) {
-        menuHtml += `
-                        <li>
-                            <div class="menu__item">
-                                <div class="menu__item-details">
-                                    <p class="menu__item-emoji">${menuItem.emoji}</p>
-                                    <ul class="menu__item-list">
-                                        <li class="menu__item-name">${menuItem.name}</li>
-                                        <li class="menu__item-ingredients">${menuItem.ingredients}</li>
-                                        <li class="menu__item-price">$${menuItem.price}</li>
-                                    </ul>
-                                </div>
-                                <button class="btn-add-item" data-add-item="${menuItem.id}"><i class="fa-thin fa-plus" data-add-item="${menuItem.id}"></i></button>
-                            </div>
-                        </li>
-                        <hr class="menu-divider">
-        `
-    })
-    return menuHtml
+  let menuHtml = ''
+  menuArray.forEach(function(menuItem) {
+    menuHtml += `
+      <li>
+        <div class="menu__item">
+          <div class="menu__item-details">
+            <p class="menu__item-emoji">${menuItem.emoji}</p>
+            <ul class="menu__item-list">
+              <li class="menu__item-name">${menuItem.name}</li>
+              <li class="menu__item-ingredients">${menuItem.ingredients.join(', ')}</li>
+              <li class="menu__item-price">₩${menuItem.price}</li>
+            </ul>
+          </div>
+          <button class="btn-add-item" data-add-item="${menuItem.id}">
+            <i class="fa-thin fa-plus" data-add-item="${menuItem.id}"></i>
+          </button>
+        </div>
+      </li>
+      <hr class="menu-divider">
+    `
+  })
+  return menuHtml
 }
 
 function renderMenu() {
