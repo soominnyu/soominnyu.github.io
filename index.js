@@ -1,93 +1,108 @@
 import { menuArray } from './data.js';
 
-let orderArray = []
-let orderTotal = 0
+let orderArray = [];
+let orderTotal = 0;
 
-document.addEventListener('click', function(e){
-    if (e.target.dataset.addItem) {
-        document.getElementById('order-summary').innerHTML = getOrderHtml(e.target.dataset.addItem)
-        document.getElementById('order-summary-section').classList.remove('hidden')
-    } else if (e.target.dataset.completeOrder) {
-        completeOrder()
-    } else if (e.target.dataset.removeItem) {
-        removeItem(e.target.dataset.removeItem)
-    } else if (e.target.dataset.submitPayment) {
-        submitPayment()
-    }
-})
+// 전역 클릭 이벤트 핸들러
+document.addEventListener('click', function (e) {
+  // 메뉴 아이템 추가
+  if (e.target.dataset.addItem) {
+    const itemId = Number(e.target.dataset.addItem);
+    document.getElementById('order-summary').innerHTML = getOrderHtml(itemId);
+    document.getElementById('order-summary-section').classList.remove('hidden');
+  }
+  // 주문 완료 버튼
+  else if (e.target.dataset.completeOrder) {
+    completeOrder();
+  }
+  // 아이템 제거 버튼
+  else if (e.target.dataset.removeItem) {
+    const itemId = Number(e.target.dataset.removeItem);
+    removeItem(itemId);
+  }
+  // 결제 정보 제출 버튼
+  else if (e.target.dataset.submitPayment) {
+    submitPayment();
+  }
+});
 
+// 결제 정보 제출 함수
 function submitPayment() {
-    const name = document.getElementById('credit-card-name').value
-    const cardNumber = document.getElementById('credit-card-number').value
-    const cVVNumber = document.getElementById('credit-card-cvv').value
-    if (name && cardNumber && cVVNumber) {
-        document.getElementById('order-summary-section').innerHTML = `
-                <div class="order-confirmation-msg">
-                    <p>Thanks, ₩{name}! Your order is on its way!</p>
-                </div>
-    `
-        document.getElementById('payment-details-modal').classList.add('hidden')
-    }
-    
+  const name = document.getElementById('credit-card-name').value;
+  const cardNumber = document.getElementById('credit-card-number').value;
+  const cVVNumber = document.getElementById('credit-card-cvv').value;
+
+  if (name && cardNumber && cVVNumber) {
+    document.getElementById('order-summary-section').innerHTML = `
+      <div class="order-confirmation-msg">
+        <p>Thanks, ${name}! Your order is on its way!</p>
+      </div>
+    `;
+    document.getElementById('payment-details-modal').classList.add('hidden');
+  }
 }
 
-function removeItem(item) {
-    let orderHtml = ''
-    const index = orderArray.findIndex((element) => element.name === item )
-    orderArray.splice(index, 1)
-    orderArray.forEach(function(orderItem){
-        orderHtml += `
-        <li>
-            <div class="order-summary__item">
-                <div class="order-summary__item">
-                    <p class="menu__item-name" id="order-item-₩{orderItem.name}">₩{orderItem.name}</p>
-                    <button class="btn-remove-item" id="" data-remove-item="₩{orderItem.name}">remove</button>
-                </div>
-                <p class="menu__item-price">₩₩{orderItem.price}</p>
-            </div>
-        </li>
-`
-    })
-    calculateOrderTotal()
-    document.getElementById('order-summary').innerHTML = orderHtml
+// 주문 목록에서 아이템 제거
+function removeItem(itemId) {
+  orderArray = orderArray.filter(item => item.id !== itemId);
+  calculateOrderTotal();
+  renderOrder();
 }
 
+// 총액 계산
 function calculateOrderTotal() {
-    orderTotal = 0
-    orderArray.forEach( function (orderItem) {
-        orderTotal += orderItem.price
-    })
-    document.getElementById('total-price').innerHTML = `₩₩{orderTotal}`
+  orderTotal = orderArray.reduce((sum, item) => sum + item.price, 0);
+  document.getElementById('total-price').textContent = `₩${orderTotal}`;
 }
 
+// 결제 모달 열기
 function completeOrder() {
-    document.getElementById('payment-details-modal').classList.remove('hidden')
+  document.getElementById('payment-details-modal').classList.remove('hidden');
 }
 
-function getOrderHtml(orderItem) { 
-    let orderHtml = ''
-    orderArray.push(menuArray[orderItem])
-    calculateOrderTotal()
-    orderArray.forEach(function(orderItem){
-        orderHtml += `
+// 주문 요약 HTML 생성
+function getOrderHtml(itemId) {
+  // 새 아이템 array에 추가
+  orderArray.push(menuArray[itemId]);
+  calculateOrderTotal();
+
+  return orderArray
+    .map(orderItem => `
+      <li>
+        <div class="order-summary__item">
+          <div class="order-summary__item-details">
+            <p class="menu__item-name">${orderItem.name}</p>
+            <button class="btn-remove-item" data-remove-item="${orderItem.id}">제거</button>
+          </div>
+          <p class="menu__item-price">₩${orderItem.price}</p>
+        </div>
+      </li>
+    `)
+    .join('');
+}
+
+// 주문 요약 렌더링 (removeItem 등에서 재사용)
+function renderOrder() {
+  document.getElementById('order-summary').innerHTML =
+    orderArray
+      .map(orderItem => `
         <li>
-            <div class="order-summary__item">
-                <div class="order-summary__item">
-                    <p class="menu__item-name" id="order-item-₩{orderItem.name}">₩{orderItem.name}</p>
-                    <button class="btn-remove-item" id="" data-remove-item="₩{orderItem.name}">remove</button>
-                </div>
-                <p class="menu__item-price">₩₩{orderItem.price}</p>
+          <div class="order-summary__item">
+            <div class="order-summary__item-details">
+              <p class="menu__item-name">${orderItem.name}</p>
+              <button class="btn-remove-item" data-remove-item="${orderItem.id}">제거</button>
             </div>
+            <p class="menu__item-price">₩${orderItem.price}</p>
+          </div>
         </li>
-`
-    })
-    return orderHtml
+      `)
+      .join('');
 }
 
+// 메뉴 목록 HTML 생성
 function getMenuHtml() {
-  let menuHtml = ''
-  menuArray.forEach(function(menuItem) {
-    menuHtml += `
+  return menuArray
+    .map(menuItem => `
       <li>
         <div class="menu__item">
           <div class="menu__item-details">
@@ -99,18 +114,19 @@ function getMenuHtml() {
             </ul>
           </div>
           <button class="btn-add-item" data-add-item="${menuItem.id}">
-            <i class="fa-thin fa-plus" data-add-item="${menuItem.id}"></i>
+            추가
           </button>
         </div>
       </li>
       <hr class="menu-divider">
-    `
-  })
-  return menuHtml
+    `)
+    .join('');
 }
 
+// 메뉴 렌더링
 function renderMenu() {
-    document.getElementById('menu').innerHTML = getMenuHtml()
+  document.getElementById('menu').innerHTML = getMenuHtml();
 }
 
-renderMenu()
+// 초기 메뉴 렌더
+renderMenu();
