@@ -24,14 +24,14 @@ export const menuArray = [
         name: "밀면사리",
         ingredients: ["grain, hops, yeast, water"],
         price: 2000,
-        emoji: "➕︎",
+        emoji: "2️⃣",
         id: 3
     },
         {
         name: "냉면사리",
         ingredients: ["grain, hops, yeast, water"],
         price: 3000,
-        emoji: "➕︎",
+        emoji: "3️⃣",
         id: 4
     },
         {
