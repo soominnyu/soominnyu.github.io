@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>Order online! | Tony's Bistro</title>
+        <!-- Stylesheet -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+        <link rel="stylesheet" href="index.css">
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Alice&display=swap" rel="stylesheet">
+        <!-- Font Awesome CDN -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+    <body>
+        <div class="container">
+            <!-- HEADER SECTION -->
+            <header>
+                <div class="header-content">
+                    <h1>Tony's Bistro</h1>
+                    <h2>The best plant-based burgers and pizzas in town</h2>
+                </div>
+            </header>
+            <!-- MAIN SECTION -->
+            <main>
+                <div class="disclaimer">
+                    <p>All menu items are 100% plant-based</p>
+                </div>
+                <!-- MENU SECTION -->
+                <div id="menu-section">
+                    <ul class="menu" id="menu">
+                        <!-- menu items and prices -->
+                    </ul>
+                </div>
+                <!-- ORDER SUMMARY SECTION -->
+                <div class="order-summary-section hidden"  id="order-summary-section">
+                    <p class="order-summary__title">Your order</p>
+                    <ul class="order-summary" id="order-summary">
+                    </ul>
+                    <hr>
+                    <div class="order-summary__item">
+                        <div class="order-summary__item">
+                            <p class="menu__item-name">Total</p>
+                        </div>
+                        <p class="menu__item-price" id="total-price">$0</p>
+                    </div>
+                    <button class="btn" data-complete-order="complete-order">Complete order</button>
+                </div>
+                <div class="payment-details-modal hidden" id="payment-details-modal">
+                    <p class="bold-text">Enter card details</p>
+                    <form action="" class="credit-card">
+                        <input 
+                            class="input" 
+                            type="text" 
+                            name="credit-card-name" 
+                            id="credit-card-name" 
+                            placeholder="Enter your name" 
+                            aria-label="Enter your name" 
+                            required
+                        >
+                        <input 
+                            class="input" 
+                            type="tel"
+                            maxlength="16" 
+                            name="credit-card-number" 
+                            id="credit-card-number" 
+                            placeholder="Enter card number" 
+                            aria-label="Enter credit card number" 
+                            required
+                        >
+                        <input 
+                            class="input" 
+                            type="tel"
+                            maxlength="3" 
+                            name="credit-card-cvv" 
+                            id="credit-card-cvv" 
+                            placeholder="Enter CVV" 
+                            aria-label="Enter CVV" 
+                            required
+                        >
+                        
+                    </form>
+                    <button class="btn" id="submit-payment-btn" data-submit-payment="submit-payment-btn" aria-label="Submit payment details">Pay</button>
+                    <p class="payment-error-msg hidden" id="payment-error-msg">Error: Please check inputs for correct payment detials.</p>
+                </div>
+            </main>
+        </div>
+	<script src="index.js" type="module"></script>
+    </body>
+</html>

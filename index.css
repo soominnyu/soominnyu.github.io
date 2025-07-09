@@ -1,0 +1,264 @@
+/* BASE STYLING */
+
+body {
+    margin: 0;
+    font-family: 'Alice', Georgia, 'Times New Roman', Times, serif;
+    font-size: 16px;
+    position: relative;
+}
+
+h1, h2, p {
+    margin: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    
+}
+
+button {
+    cursor: pointer; 
+}
+
+
+/* HEADER SECTION */
+
+header {
+    background-image: url('images/burger.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    color: whitesmoke;
+    text-shadow: 0px 0px 3px black;
+    
+}
+
+.header-content {    
+    padding: 0 0 1em 1em;
+}
+
+header h1 {
+    font-size: 40px;
+}
+
+header h2 {
+    font-size: 20px;
+}
+
+/* MENU SECTION */
+
+main {
+    width: 88%;
+    margin: 0 auto;
+}
+
+.disclaimer {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-style: italic;
+    font-size: 12px;
+    color: #8B8B8B;
+    text-align: center;
+    margin: 2em 0;
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+}
+
+.menu__item {
+    display: flex;
+    justify-content: space-between;
+    margin: 2em 0;
+}
+
+.menu__item-details {
+    display: flex;
+}
+
+.menu__item-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    
+}
+
+.menu__item-name {
+    font-size: 24px;
+}
+
+.menu__item-emoji {
+    font-size: 60px;
+    margin-right: .25em;
+}
+
+.menu__item-price {
+    font-size: 20px;
+}
+
+.menu__item-ingredients {
+    color: #8B8B8B;
+    font-size: 16px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.btn-add-item {
+    border: 1px #DEDEDE solid;
+    border-radius: 100%;
+    background-color: transparent;
+    padding: 0;
+    height: 40px;
+    width: 40px;
+    font-size: 16px;
+    font-family: Verdana, Tahoma, sans-serif;
+}
+
+.btn-add-item:hover {
+    color: white;
+    background-color: #16DB99;
+    
+}
+
+.btn-add-item:active {
+    color: black;
+    background-color: transparent;
+}
+
+.menu-divider {
+    border: 1px solid #8B8B8B;
+}
+
+/* ORDER SUMMARY SECTION */
+
+.order-divider {
+    border: 2px solid black;
+}
+
+.order-summary-section {
+    margin: 2em 0 5em 0;
+    text-align: center;
+}
+
+.order-summary__title {
+    font-size: 28px;
+    margin-bottom: 1.5em;
+}
+
+.order-summary {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+}
+
+.order-summary__item {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.25em 0;
+    
+}
+
+.btn-remove-item {
+    color: #8B8B8B;
+    font-size: 16px;
+    font-family: Verdana, Tahoma, sans-serif;
+    border: none;
+    background: none;
+    margin-left: 0.5em;   
+}
+
+.btn-remove-item:hover {
+    color: rosybrown;
+}
+
+.btn-remove-item:active {
+    color: red;
+}
+
+.btn {
+    border: none;
+    background-color: #16DB99;
+    color: white;
+    font-size: 16px;
+    font-family: Verdana, 'Geneva', Tahoma, sans-serif;
+    font-weight: 700;
+    width: 100%;
+    padding: 1em 0;
+    border-radius: 3px;
+    margin: 2em auto;
+}
+
+.btn:hover {
+    border: 2px solid #16DB99;
+    color: #16DB99;
+    background-color: white;
+}
+
+.btn:active {
+    background-color: #16DB99;
+    color: white;
+}
+
+/* PAYMENT MODAL */
+
+.payment-details-modal {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 1.5em;
+    font-family: Verdana, Tahoma, sans-serif;
+    text-align: center;
+    width: 300px;
+    height: auto;
+    box-shadow: 0 0 150px black;
+    background-color: white;
+}
+
+.bold-text {
+    font-weight: 900;
+}
+
+input {
+    display: block;
+    margin: 1em auto;
+    width: 90%;
+}
+
+.input {
+    border: 1px solid #8B8B8B;
+    border-radius: 3px;
+    height: 2em;
+
+}
+
+#submit-payment-btn {
+    width: 90%;
+}
+
+.hidden {
+    display: none;
+}
+
+/* ORDER CONFIRMATION */
+.order-confirmation-msg {
+    background-color: #ECFDF5;
+    color: #065F46;
+    font-size: 1.5rem;
+    margin: 0 auto;
+    text-align: center;
+    padding: 1em 2em;
+}
+
+.payment-error-msg {
+    color: red;
+    font-weight: 600;
+}
