@@ -99,29 +99,28 @@ function renderOrder() {
       .join('');
 }
 
-// 메뉴 목록 HTML 생성
 function getMenuHtml() {
-  return menuArray
-    .map(menuItem => `
-      <li>
-        <div class="menu__item">
-          <div class="menu__item-details">
-            <p class="menu__item-emoji">${menuItem.emoji}</p>
-            <ul class="menu__item-list">
-              <li class="menu__item-name">${menuItem.name}</li>
-              <li class="menu__item-ingredients">${menuItem.ingredients.join(', ')}</li>
-              <li class="menu__item-price">₩${menuItem.price}</li>
-            </ul>
-          </div>
-          <button class="btn-add-item" data-add-item="${menuItem.id}">
-            추가
-          </button>
+  let menuHtml = '';
+  menuArray.forEach(function(menuItem) {
+    menuHtml += `
+      <li class="menu__item">
+        <div class="menu__item-details">
+          <p class="menu__item-emoji">${menuItem.emoji}</p>
+          <ul class="menu__item-list">
+            <li class="menu__item-name">${menuItem.name}</li>
+            <li class="menu__item-ingredients">${menuItem.ingredients.join(', ')}</li>
+            <li class="menu__item-price">₩${menuItem.price}</li>
+          </ul>
         </div>
+        <!-- 여기에 추가 버튼이 반드시 있어야 합니다 -->
+        <button class="btn-add-item" data-add-item="${menuItem.id}">추가</button>
       </li>
       <hr class="menu-divider">
-    `)
-    .join('');
+    `;
+  });
+  return menuHtml;
 }
+
 
 // 메뉴 렌더링
 function renderMenu() {
